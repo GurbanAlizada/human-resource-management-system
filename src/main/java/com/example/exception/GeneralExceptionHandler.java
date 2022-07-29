@@ -41,6 +41,13 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(AdvertismentNotFoundException.class)
+    public ResponseEntity<?> advertisementNotFoundException(AdvertismentNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
+    }
+
+
+
 
     @ExceptionHandler(MernisNotFoundExcpeption.class)
     public ResponseEntity<?> mernisNotFoundException(MernisNotFoundExcpeption exception){

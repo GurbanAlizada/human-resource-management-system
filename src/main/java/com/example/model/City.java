@@ -8,26 +8,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "job_titles")
-public class JobTitle {
+@Data
+@Builder
+@Table(name = "city")
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(mappedBy = "jobTitle")
+
+    @OneToMany(mappedBy = "city")
     @JsonIgnore
-    private List<Advertisment> advertisments;
+    private List<Advertisment> advertisments = new ArrayList<>();
+
+
+
 
 }

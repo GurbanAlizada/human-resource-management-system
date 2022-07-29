@@ -1,9 +1,11 @@
 package com.example.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,6 +35,9 @@ public class Employer implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "employer")
+    @JsonIgnore
+    private List<Advertisment> advertismens;
 
 
 }

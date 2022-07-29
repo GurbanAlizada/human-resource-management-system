@@ -2,6 +2,7 @@ package com.example.service.impl;
 
 import com.example.dtos.request.JobTitleRequest;
 import com.example.exception.JobTitleNotFoundException;
+import com.example.exception.MernisNotFoundExcpeption;
 import com.example.model.JobTitle;
 import com.example.repository.JobTitleRepository;
 import com.example.service.inter.JobTitleServiceInter;
@@ -23,9 +24,12 @@ public class JobTitleServiceImpl implements JobTitleServiceInter {
 
     @Override
     public JobTitle add(JobTitleRequest jobTitleRequest) {
-        JobTitle jobTitle = new JobTitle();
-        jobTitle.setTitle(jobTitleRequest.getTitle());
-        return jobTitleRepository.save(jobTitle);
+        if(getByTitle(jobTitleRequest.getTitle())== null) {
+            JobTitle jobTitle = new JobTitle();
+            jobTitle.setTitle(jobTitleRequest.getTitle());
+            return jobTitleRepository.save(jobTitle);
+        }
+        throw new MernisNotFoundExcpeption("Bu isimde zaten meslek var");
     }
 
     @Override

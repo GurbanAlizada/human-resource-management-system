@@ -5,12 +5,10 @@ import com.example.dtos.request.EmployerRequest;
 import com.example.model.Employer;
 import com.example.service.inter.EmployerServiceInter;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/employers")
@@ -31,6 +29,10 @@ public class EmployersController {
 
 
 
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Employer>> getAll(){
+        return ResponseEntity.ok(employerServiceInter.getAll());
+    }
 
 
 

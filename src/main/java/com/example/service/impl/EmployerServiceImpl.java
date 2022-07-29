@@ -10,6 +10,8 @@ import com.example.service.inter.UserServiceInter;
 import com.example.verifications.inter.FakeEmailVerificationServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class EmployerServiceImpl implements EmployerServiceInter {
@@ -62,6 +64,9 @@ public class EmployerServiceImpl implements EmployerServiceInter {
 
 
 
+    public List<Employer> getAll(){
+        return  employerRepository.findAll();
+    }
 
 
 }

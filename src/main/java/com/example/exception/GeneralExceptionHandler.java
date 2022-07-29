@@ -18,11 +18,35 @@ import java.util.Map;
 public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
 
+    @NotNull
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid
+            (MethodArgumentNotValidException ex,
+             @NotNull HttpHeaders headers,
+             @NotNull HttpStatus status,
+             @NotNull WebRequest request)
+    {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach(error ->{
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+
+    }
 
     @ExceptionHandler(JobTitleNotFoundException.class)
     public ResponseEntity<?> productNotFoundException(JobTitleNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
     }
+
+
+    @ExceptionHandler(MernisNotFoundExcpeption.class)
+    public ResponseEntity<?> mernisNotFoundException(MernisNotFoundExcpeption exception){
+        return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
+    }
+
 
 
 

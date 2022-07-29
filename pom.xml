@@ -62,6 +62,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.ow2.easywsdl/easywsdl-wsdl -->
+        <dependency>
+            <groupId>org.ow2.easywsdl</groupId>
+            <artifactId>easywsdl-wsdl</artifactId>
+            <version>2.7.0</version>
+        </dependency>
 
 
     </dependencies>

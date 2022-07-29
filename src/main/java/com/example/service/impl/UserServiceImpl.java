@@ -1,6 +1,5 @@
 package com.example.service.impl;
 
-import com.example.dtos.request.UserRequest;
 import com.example.model.User;
 import com.example.repository.UserRepository;
 import com.example.service.inter.UserServiceInter;
@@ -25,14 +24,6 @@ public class UserServiceImpl implements UserServiceInter {
     public User getByEmailAndPasword(String email, String password) {
         return userRepository.getByEmailAndPasword(email, password);
     }
-
-
-    @Override
-    public User add(UserRequest userRequest) {
-        User user = new User(0 , userRequest.getEmail(), userRequest.getPassword());
-        return userRepository.save(user);
-    }
-
 
 
 

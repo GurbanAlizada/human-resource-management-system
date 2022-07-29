@@ -38,6 +38,7 @@ public class CandidateRequest {
     @NotNull
     private long identityNumber;
 
+    @NotNull
     private LocalDate dateOfBirth ;
 
 }

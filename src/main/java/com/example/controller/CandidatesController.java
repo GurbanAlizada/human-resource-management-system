@@ -2,7 +2,6 @@ package com.example.controller;
 
 
 import com.example.dtos.request.CandidateRequest;
-import com.example.dtos.request.UserRequest;
 import com.example.model.Candidate;
 import com.example.service.impl.CandidateServiceImpl;
 import org.springframework.http.ResponseEntity;

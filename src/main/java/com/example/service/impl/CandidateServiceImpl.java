@@ -8,7 +8,7 @@ import com.example.model.User;
 import com.example.repository.CandidateRepository;
 import com.example.service.inter.CandidateServiceInterr;
 import com.example.service.inter.UserServiceInter;
-import com.example.verifications.impl.FakeEmailVerificationServiceInter;
+import com.example.verifications.inter.FakeEmailVerificationServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +22,17 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
     private final CandidateRepository candidateRepository;
     private final CheckPerson checkPerson;
     private final UserServiceInter userServiceInter;
-    private final FakeEmailVerificationServiceInter fakeEmailVerificationServiceInter;
+    private final FakeEmailVerificationServiceImpl fakeEmailVerificationService;
 
     public CandidateServiceImpl(CandidateRepository candidateRepository,
                                 @Qualifier(value = "MernisServiceAdapter") CheckPerson checkPerson ,
                                 UserServiceInter userServiceInter ,
-    FakeEmailVerificationServiceInter fakeEmailVerificationServiceInter) {
+                                FakeEmailVerificationServiceImpl fakeEmailVerificationService
+                              ) {
         this.candidateRepository = candidateRepository;
         this.checkPerson = checkPerson;
         this.userServiceInter = userServiceInter;
-        this.fakeEmailVerificationServiceInter=fakeEmailVerificationServiceInter;
+        this.fakeEmailVerificationService=fakeEmailVerificationService;
     }
 
     private Candidate checkIdentityNumber(long identityNumber){
@@ -48,23 +49,27 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
     @Override
     public Candidate add(CandidateRequest candidateRequest ) {
 
-        Candidate candidate = new Candidate(
-                0,
-                candidateRequest.getEmail(),
-                candidateRequest.getPassword(),
-                candidateRequest.getName(),
-                candidateRequest.getSurname(),
-                candidateRequest.getIdentityNumber(),
-                candidateRequest.getDateOfBirth()
-        );
 
-        if (checkPerson.checkIfRealPerson(candidate.getIdentityNumber() , candidate.getName(), candidateRequest.getSurname(), candidate.getDateOfBirth())) {
 
-            if(checkIdentityNumber(candidate.getIdentityNumber()) == null){
+        if (checkPerson.checkIfRealPerson(candidateRequest.getIdentityNumber() , candidateRequest.getName(), candidateRequest.getSurname(), candidateRequest.getDateOfBirth())) {
+            if(checkIdentityNumber(candidateRequest.getIdentityNumber()) == null){
                 if (checkEmail(candidateRequest.getEmail()) == null){
+                    if(fakeEmailVerificationService.sendEmail(candidateRequest.getEmail())){
 
-                    if(fakeEmailVerificationServiceInter.sendEmail(null)){
+                        User user = new User(candidateRequest.getEmail(), candidateRequest.getPassword());
+
+                        Candidate candidate = Candidate.builder()
+                                .name(candidateRequest.getName())
+                                .surname(candidateRequest.getSurname())
+                                .identityNumber(candidateRequest.getIdentityNumber())
+                                .dateOfBirth(candidateRequest.getDateOfBirth())
+                                .user(user)
+                                .build();
+
                         return candidateRepository.save(candidate);
+
+
+
                     }else{
                         throw new MernisNotFoundExcpeption("Email dogrulamasi yapilmadi");
                     }

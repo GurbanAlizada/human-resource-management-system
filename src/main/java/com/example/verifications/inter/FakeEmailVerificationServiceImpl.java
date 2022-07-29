@@ -1,6 +1,5 @@
 package com.example.verifications.inter;
 
-import com.example.model.VerificationCode;
 import com.example.verifications.impl.FakeEmailVerificationServiceInter;
 import org.springframework.stereotype.Component;
 
@@ -10,15 +9,15 @@ public class FakeEmailVerificationServiceImpl implements FakeEmailVerificationSe
 
 
     @Override
-    public boolean sendEmail(VerificationCode verificationCode) {
+    public boolean sendEmail(String email) {
 
 
-        if(verificationCode.getCode()>1000){
-            verificationCode.setVerified(true);
-            return true;
-        }
+        //
+        //
+        //
 
-        return false;
+
+        return true;
     }
 
 

@@ -16,4 +16,6 @@ public interface AdvertisementServiceInter {
     public String deleteAdvertisement(int id);
     public String toPassiv(int id);
     public String toActive(int id);
+    List<AdvertisementDto> getByCity_Name(String name);
+
 }

@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.dtos.request.CityRequest;
+import com.example.model.Advertisment;
 import com.example.model.City;
 import com.example.repository.CityRepository;
 import com.example.service.inter.CityServiceInter;
@@ -33,6 +34,10 @@ public class CityServiceImpl implements CityServiceInter {
     public List<City> getAll(){
         return cityRepository.findAll();
     }
+
+
+
+
 
 
 }

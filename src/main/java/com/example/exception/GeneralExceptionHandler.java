@@ -47,10 +47,25 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
+    @ExceptionHandler(CandidateNotFoundException.class)
+    public ResponseEntity<?> candidateNotFoundException(CandidateNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(ContactNotFoundException.class)
+    public ResponseEntity<?> contactNotFoundException(ContactNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
+    }
 
 
     @ExceptionHandler(MernisNotFoundExcpeption.class)
     public ResponseEntity<?> mernisNotFoundException(MernisNotFoundExcpeption exception){
+        return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CvNotFoundException.class)
+    public ResponseEntity<?> cvNotFoundException(CvNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage() , HttpStatus.NOT_FOUND);
     }
 

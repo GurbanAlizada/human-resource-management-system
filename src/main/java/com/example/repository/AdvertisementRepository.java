@@ -20,6 +20,8 @@ public interface AdvertisementRepository extends JpaRepository<Advertisment ,Int
     List<Advertisment> getByEmployer_CompanyName(String companyName);
 
 
+    List<Advertisment> getByCity_Name(String name);
+
 
 
 

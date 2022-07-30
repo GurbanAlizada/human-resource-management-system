@@ -1,14 +1,15 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -44,6 +45,10 @@ public class Candidate implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+    @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
+    private List<Cv> cvList = new ArrayList<>();
 
 
 }

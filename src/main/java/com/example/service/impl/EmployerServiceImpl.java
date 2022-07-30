@@ -39,7 +39,7 @@ public class EmployerServiceImpl implements EmployerServiceInter {
 
            if(fakeEmailVerificationService.sendEmail(employerRequest.getEmail())){
 
-               User user = new User(employerRequest.getEmail(), employerRequest.getPassword());
+               User user = new User(employerRequest.getEmail() , employerRequest.getPassword());
 
                Employer employer = Employer.builder()
                        .id(0)
@@ -52,7 +52,7 @@ public class EmployerServiceImpl implements EmployerServiceInter {
                return employerRepository.save(employer);
 
            }else{
-               throw new MernisNotFoundExcpeption("Sisstemde zaten bu gmail var");
+               throw new MernisNotFoundExcpeption("Sistemde zaten bu gmail var");
 
            }
         }else{

@@ -87,7 +87,6 @@ public class AdvertisementServiceImpl implements AdvertisementServiceInter {
                 .filter(n->n.isEnable()==true)
                 .map(n->advertisementDtoConvertor.convertToAdvertisementDto(n))
                 .collect(Collectors.toList());
-
         return dto ;
     }
 
@@ -108,7 +107,7 @@ public class AdvertisementServiceImpl implements AdvertisementServiceInter {
     public String deleteAdvertisement(int id){
        Advertisment advertisment= advertisementRepository.findById(id)
                .orElseThrow(
-                       ()->new AdvertismentNotFoundException("Boylr bir ilan bulunmuyor"));
+                       ()->new AdvertismentNotFoundException("Boyle bir ilan bulunmuyor"));
        advertisementRepository.delete(advertisment);
        return "Ilan basari ile silindi";
     }
@@ -118,7 +117,7 @@ public class AdvertisementServiceImpl implements AdvertisementServiceInter {
     public String toPassiv(int id){
         Advertisment advertisment= advertisementRepository.findById(id)
                 .orElseThrow(
-                        ()->new AdvertismentNotFoundException("Boylr bir ilan bulunmuyor"));
+                        ()->new AdvertismentNotFoundException("Boyle bir ilan bulunmuyor"));
 
         advertisment.setEnable(false);
         advertisementRepository.save(advertisment);
@@ -139,6 +138,15 @@ public class AdvertisementServiceImpl implements AdvertisementServiceInter {
 
 
 
+    @Override
+    public List<AdvertisementDto> getByCity_Name(String name){
+        List<Advertisment> advertisments = advertisementRepository.getByCity_Name(name);
+        List<AdvertisementDto> dto =  advertisments.stream()
+                .filter(n->n.isEnable()==true)
+                .map(n->advertisementDtoConvertor.convertToAdvertisementDto(n))
+                .collect(Collectors.toList());
+        return dto ;
+    }
 
 
 

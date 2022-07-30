@@ -2,6 +2,7 @@ package com.example.service.impl;
 
 import com.example.adapters.impl.CheckPerson;
 import com.example.dtos.request.CandidateRequest;
+import com.example.exception.CandidateNotFoundException;
 import com.example.exception.MernisNotFoundExcpeption;
 import com.example.model.Candidate;
 import com.example.model.User;
@@ -29,6 +30,7 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
                                 UserServiceInter userServiceInter ,
                                 FakeEmailVerificationServiceImpl fakeEmailVerificationService
                               ) {
+
         this.candidateRepository = candidateRepository;
         this.checkPerson = checkPerson;
         this.userServiceInter = userServiceInter;
@@ -45,11 +47,15 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
     }
 
 
+    protected Candidate getById(int id){
+        return candidateRepository.findById(id)
+                .orElseThrow(
+                        ()->new CandidateNotFoundException("Boyle bir is ariyan bulunmadi"));
+    }
+
 
     @Override
     public Candidate add(CandidateRequest candidateRequest ) {
-
-
 
         if (checkPerson.checkIfRealPerson(candidateRequest.getIdentityNumber() , candidateRequest.getName(), candidateRequest.getSurname(), candidateRequest.getDateOfBirth())) {
             if(checkIdentityNumber(candidateRequest.getIdentityNumber()) == null){
@@ -67,7 +73,6 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
                                 .build();
 
                         return candidateRepository.save(candidate);
-
 
 
                     }else{

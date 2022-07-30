@@ -72,4 +72,15 @@ public class AdvertisementsController {
         return advertisementServiceInter.toActive(id);
     }
 
+
+
+
+
+    @GetMapping("/getByCityName")
+    public List<AdvertisementDto> getByCity_Name(String name){
+        return advertisementServiceInter.getByCity_Name(name);
+    }
+
+
+
 }

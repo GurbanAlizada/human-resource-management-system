@@ -1,66 +1,58 @@
 package com.example.service.impl;
 
-import com.example.dtos.request.CvRequest;
-import com.example.exception.CvNotFoundException;
-import com.example.model.Candidate;
-import com.example.model.Contact;
-import com.example.model.Cv;
-import com.example.repository.CandidateRepository;
-import com.example.repository.CvRepository;
-import com.example.service.inter.CandidateServiceInterr;
+import com.example.dtos.CVDto;
+import com.example.repository.*;
 import com.example.service.inter.CvServiceInter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class CvServiceImpl implements CvServiceInter {
 
+   private final CandidateRepository candidateRepository;
+   private final CoverLetterRepository coverLetterRepository;
+   private final EducationRepository educationRepository;
+   private final ExperienceRepository experienceRepository;
+   private final LanguageRepository languageRepository;
+   private final LinkRepository linkRepository;
+   private final TechnologyRepository technologyRepository;
 
-    private final CvRepository cvRepository;
 
-    private final CandidateServiceImpl candidateService;
+    public CvServiceImpl(CandidateRepository candidateRepository,
+                         CoverLetterRepository coverLetterRepository,
+                         EducationRepository educationRepository,
+                         ExperienceRepository experienceRepository,
+                         LanguageRepository languageRepository,
+                         LinkRepository linkRepository,
+                         TechnologyRepository technologyRepository) {
 
-    private final ContactServiceImpl contactService;
-
-    public CvServiceImpl(CvRepository cvRepository,
-                         CandidateServiceImpl candidateService,
-                         ContactServiceImpl contactService) {
-
-        this.cvRepository = cvRepository;
-        this.candidateService = candidateService;
-        this.contactService = contactService;
+        this.candidateRepository = candidateRepository;
+        this.coverLetterRepository = coverLetterRepository;
+        this.educationRepository = educationRepository;
+        this.experienceRepository = experienceRepository;
+        this.languageRepository = languageRepository;
+        this.linkRepository = linkRepository;
+        this.technologyRepository = technologyRepository;
     }
-
-    protected Cv getById(int id){
-        return cvRepository.findById(id)
-                .orElseThrow(
-                        ()->new CvNotFoundException("Boyle bir cv bulunmuyor"));
-    }
-
-
-
-    public Cv addCv(CvRequest cvRequest){
-
-        Candidate candidate = candidateService.getById(cvRequest.getCandidateId());
-        Contact contact =  contactService.getById(cvRequest.getContactId());
-
-        Cv cv = Cv.builder()
-                .coverLetter(cvRequest.getCoverLetter())
-                .candidate(candidate)
-                .contact(contact)
-                .build();
-        return cvRepository.save(cv);
-
-    }
-
 
     @Override
-    public List<Cv> getAll(){
-        return cvRepository.findAll();
+    public CVDto getById(int candidateId) {
+        CVDto cvDto = CVDto.builder()
+                .candidate(candidateRepository.findById(candidateId).get())
+                .coverLetterList(coverLetterRepository.findByCandidateId(candidateId))
+                .educationList(educationRepository.findByCandidateId(candidateId))
+                .experienceList(experienceRepository.findByCandidateId(candidateId))
+                .languageList(languageRepository.findByCandidateId(candidateId))
+                .linkList(linkRepository.findByCandidateId(candidateId))
+                .technologyList(technologyRepository.findByCandidateId(candidateId))
+                .build();
+
+        return cvDto;
+
     }
+
+
 
 
 

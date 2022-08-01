@@ -1,19 +1,23 @@
 package com.example.dtos.request;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EducationRequest {
+public class LinkRequest {
+
+    private String githubLink;
+
+
+    private String linkedinLink;
 
     private int candidateId;
-    private String school;
-    private LocalDate startDate;
-    private LocalDate endDate;
+
 
 }

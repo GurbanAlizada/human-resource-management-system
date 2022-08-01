@@ -1,12 +1,10 @@
 package com.example.service.inter;
 
-import com.example.dtos.request.LanguageRequest;
-import com.example.model.Language;
-
+import com.example.model.cv.Language;
 import java.util.List;
 
 public interface LanguageServiceInter {
-    public Language addLanguage(List<LanguageRequest> languageRequests);
 
+     List<Language> getAll();
 
 }

@@ -1,13 +1,19 @@
 package com.example.service.inter;
 
-import com.example.dtos.request.EducationRequest;
-import com.example.model.Education;
+import com.example.model.cv.Education;
+import com.example.repository.EducationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 public interface EducationServiceInter {
 
-    public Education addEducation(EducationRequest educationRequest);
-    public List<Education> getAllBySorted(int id);
+
+    public List<Education> getAll();
+    public List<Education> findByCandidate_IdOrderByEndDateDesc(int id);
+
+
 
 }

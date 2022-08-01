@@ -1,9 +1,11 @@
 package com.example.controller;
 
 
-import com.example.dtos.request.CandidateRequest;
+import com.example.dtos.request.*;
 import com.example.model.Candidate;
+import com.example.model.cv.*;
 import com.example.service.impl.CandidateServiceImpl;
+import com.example.service.inter.CandidateServiceInterr;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +17,14 @@ import java.util.List;
 public class CandidatesController {
 
 
-   private final CandidateServiceImpl candidateService;
+   private final CandidateServiceInterr candidateService;
 
     public CandidatesController(CandidateServiceImpl candidateService) {
         this.candidateService = candidateService;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Candidate> add(@Valid @RequestBody  CandidateRequest candidateRequest){
+    public ResponseEntity<Candidate> add(@Valid @RequestBody  CandidateRequest candidateRequest ){
         return ResponseEntity.ok(candidateService.add(candidateRequest ));
     }
 
@@ -31,6 +33,13 @@ public class CandidatesController {
     public ResponseEntity<List<Candidate>> getAll(){
         return ResponseEntity.ok(candidateService.getAll());
     }
+
+
+    @GetMapping("/getById")
+    public Candidate getById(@RequestParam("id") int id){
+        return candidateService.getById(id);
+    }
+
 
 
 }

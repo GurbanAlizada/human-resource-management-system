@@ -3,6 +3,7 @@ package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "candidate" , "employee" , "employer"})
+
 public class User implements Serializable {
 
     @Id
@@ -50,6 +53,8 @@ public class User implements Serializable {
         this.email = email;
         this.pasword = pasword;
     }
+
+
 
 
 }

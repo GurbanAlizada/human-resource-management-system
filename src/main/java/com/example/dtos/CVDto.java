@@ -31,6 +31,7 @@ public class CVDto {
 
     List<CoverLetter> coverLetterList;
 
+    List<Photo> photoList;
 
 
 

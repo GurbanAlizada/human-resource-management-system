@@ -4,6 +4,7 @@ package com.example.controller.cvController;
 import com.example.model.cv.Technology;
 import com.example.service.inter.TechnologyServiceInter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/technology")
+@CrossOrigin
 public class TechnologiesController {
 
 

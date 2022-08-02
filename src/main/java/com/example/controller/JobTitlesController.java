@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/JobTitle")
+@CrossOrigin
 public class JobTitlesController {
 
     private final JobTitleServiceInter jobTitleServiceInter ;

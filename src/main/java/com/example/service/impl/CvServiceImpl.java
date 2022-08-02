@@ -5,7 +5,6 @@ import com.example.repository.*;
 import com.example.service.inter.CvServiceInter;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class CvServiceImpl implements CvServiceInter {
@@ -17,6 +16,7 @@ public class CvServiceImpl implements CvServiceInter {
    private final LanguageRepository languageRepository;
    private final LinkRepository linkRepository;
    private final TechnologyRepository technologyRepository;
+   private final PhotoRepository photoRepository;
 
 
     public CvServiceImpl(CandidateRepository candidateRepository,
@@ -25,7 +25,8 @@ public class CvServiceImpl implements CvServiceInter {
                          ExperienceRepository experienceRepository,
                          LanguageRepository languageRepository,
                          LinkRepository linkRepository,
-                         TechnologyRepository technologyRepository) {
+                         TechnologyRepository technologyRepository,
+                         PhotoRepository photoRepository) {
 
         this.candidateRepository = candidateRepository;
         this.coverLetterRepository = coverLetterRepository;
@@ -34,6 +35,7 @@ public class CvServiceImpl implements CvServiceInter {
         this.languageRepository = languageRepository;
         this.linkRepository = linkRepository;
         this.technologyRepository = technologyRepository;
+        this.photoRepository =photoRepository;
     }
 
     @Override
@@ -46,6 +48,7 @@ public class CvServiceImpl implements CvServiceInter {
                 .languageList(languageRepository.findByCandidate_Id(candidateId))
                 .linkList(linkRepository.findByCandidateId(candidateId))
                 .technologyList(technologyRepository.findByCandidate_Id(candidateId))
+                .photoList(photoRepository.findByCandidate_Id(candidateId))
                 .build();
 
         return cvDto;

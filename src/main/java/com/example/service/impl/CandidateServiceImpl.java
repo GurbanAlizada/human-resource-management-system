@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.example.adapters.impl.CheckPerson;
+import com.example.adapters.mernis.inter.CheckPerson;
 import com.example.dtos.request.*;
 import com.example.exception.CandidateNotFoundException;
 import com.example.exception.MernisNotFoundExcpeption;
@@ -11,7 +11,6 @@ import com.example.repository.*;
 import com.example.service.inter.CandidateServiceInterr;
 import com.example.service.inter.UserServiceInter;
 import com.example.verifications.inter.FakeEmailVerificationServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/advertisents")
+@CrossOrigin
 public class AdvertisementsController {
 
     private final AdvertisementServiceInter advertisementServiceInter;

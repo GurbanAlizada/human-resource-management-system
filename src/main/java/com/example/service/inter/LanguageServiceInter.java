@@ -6,5 +6,6 @@ import java.util.List;
 public interface LanguageServiceInter {
 
      List<Language> getAll();
+     List<Language> getById(int id);
 
 }

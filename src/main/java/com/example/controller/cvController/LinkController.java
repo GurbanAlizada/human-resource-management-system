@@ -3,6 +3,7 @@ package com.example.controller.cvController;
 
 import com.example.model.cv.Link;
 import com.example.service.inter.LinkServiceInter;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,12 +24,16 @@ public class LinkController {
 
 
     @GetMapping("/getAll")
-    public List<Link> getAll(){
-        return linkServiceInter.getAll();
+    public ResponseEntity<List<Link>> getAll(){
+        return ResponseEntity.ok(linkServiceInter.getAll());
     }
 
 
 
+    @GetMapping("/getById")
+    public ResponseEntity<List<Link>> getById(int id){
+        return ResponseEntity.ok(linkServiceInter.getById(id));
+    }
 
 
 

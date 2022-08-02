@@ -2,6 +2,7 @@ package com.example.controller.cvController;
 
 import com.example.model.cv.Experience;
 import com.example.service.impl.ExperienceServiceImpl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,13 +22,16 @@ public class ExperienceController {
     }
 
     @GetMapping("/getAll")
-    public List<Experience> getAll(){
-        return experienceService.getAll();
+    public ResponseEntity<List<Experience>> getAll(){
+        return ResponseEntity.ok(experienceService.getAll());
     }
 
 
     @GetMapping("/getAllBySorted")
-    public List<Experience> findByCandidate_IdOrderByEndDateDesc(int id){
-        return experienceService.findByCandidate_IdOrderByEndDateDesc(id);
+    public ResponseEntity<List<Experience>>
+    findByCandidate_IdOrderByEndDateDesc(int id){
+        return ResponseEntity.ok(
+                experienceService.findByCandidate_IdOrderByEndDateDesc(id)
+        );
     }
 }

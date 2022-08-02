@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface TechnologyRepository extends JpaRepository<Technology , Integer> {
 
-    @Query("from Technology  t inner join t.candidate c where c.id=:candidateId")
-    List<Technology> findByCandidateId(int candidateId);
+   /* @Query("from Technology  t inner join t.candidate c where c.id=:candidateId")
+    List<Technology> findByCandidateId(int candidateId);*/
 
+
+    List<Technology> findByCandidate_Id(int id);
 
 }

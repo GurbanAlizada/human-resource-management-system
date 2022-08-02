@@ -20,8 +20,11 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "candidate" , "employee" , "employer"})
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler",
+        "candidate" ,
+        "employee" ,
+        "employer"
+})
 public class User implements Serializable {
 
     @Id
@@ -36,16 +39,16 @@ public class User implements Serializable {
     private String pasword;
 
     @OneToOne(mappedBy = "user")
-    @JsonIgnore
+    //@JsonIgnore
     private Candidate candidate;
 
     @OneToOne(mappedBy = "user")
-    @JsonIgnore
+    //@JsonIgnore
     private Employee employee;
 
 
     @OneToOne(mappedBy = "user")
-    @JsonIgnore
+    //@JsonIgnore
     private Employer employer;
 
 

@@ -17,14 +17,21 @@ import java.util.List;
 public class CVDto {
 
 
+    Candidate candidate;
 
     List<Experience> experienceList;
+
     List<Language> languageList;
+
     List<Link> linkList;
+
     List<Education> educationList;
+
     List<Technology> technologyList;
+
     List<CoverLetter> coverLetterList;
-    Candidate candidate;
+
+
 
 
 

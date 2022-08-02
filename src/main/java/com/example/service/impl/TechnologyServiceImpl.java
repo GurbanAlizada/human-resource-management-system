@@ -21,12 +21,16 @@ public class TechnologyServiceImpl implements TechnologyServiceInter {
 
 
 
+    @Override
     public List<Technology> getAll(){
         return technologyRepository.findAll();
     }
 
 
-
+    @Override
+   public List<Technology> findByCandidate_Id(int id){
+        return technologyRepository.findByCandidate_Id(id);
+    }
 
 
 }

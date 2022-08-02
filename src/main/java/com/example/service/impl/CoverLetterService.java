@@ -24,7 +24,10 @@ public class CoverLetterService implements CoverLetterServiceInter {
         return coverLetterRepository.findAll();
     }
 
-
+    @Override
+    public List<CoverLetter> getById(int id) {
+        return coverLetterRepository.findByCandidateId(id);
+    }
 
 
 }

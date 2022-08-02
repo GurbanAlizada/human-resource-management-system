@@ -3,24 +3,24 @@ package com.example.model.cv;
 import com.example.model.Candidate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode
 @NoArgsConstructor
+@Table(name = "education")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","candidate"})
-public class Education {
+public class Education implements Serializable {
 
 
     @Id
@@ -28,15 +28,15 @@ public class Education {
     @Column(name="id")
     private int id;
 
-    @NotNull
-    @NotBlank
+    //@NotNull
+    //@NotBlank
     @Column(name="company_name")
     private String school;
 
 
 
    // @PastOrPresent
-    @NotNull
+    //@NotNull
     @Column(name="start_date")
     private LocalDate startDate;
 
@@ -48,7 +48,7 @@ public class Education {
 
 
 
-    @JsonIgnore
+   // @JsonIgnore
     @JoinColumn(name="candidates_id")
     @ManyToOne
     private Candidate candidate;

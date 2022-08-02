@@ -2,22 +2,22 @@ package com.example.model.cv;
 import com.example.model.Candidate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @Builder
+@EqualsAndHashCode
+@Table(name = "language")
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","candidate"})
-public class Language {
+public class Language implements Serializable {
 
 
 
@@ -28,8 +28,8 @@ public class Language {
     private int id;
 
 
-    @Min(1)
-    @Max(5)
+    //@Min(1)
+    //@Max(5)
     @Column(name="language_level")
     private int languageLevel;
 
@@ -39,7 +39,7 @@ public class Language {
 
 
 
-    @JsonIgnore
+   // @JsonIgnore
     @JoinColumn(name = "candidates_id")
     @ManyToOne
     private Candidate candidate;

@@ -36,8 +36,8 @@ public class CandidatesController {
 
 
     @GetMapping("/getById")
-    public Candidate getById(@RequestParam("id") int id){
-        return candidateService.getById(id);
+    public ResponseEntity<Candidate> getById(@RequestParam("id") int id){
+        return ResponseEntity.ok(candidateService.getById(id));
     }
 
 

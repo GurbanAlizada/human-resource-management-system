@@ -28,6 +28,7 @@ public class EducationServiceImpl implements EducationServiceInter {
         return educationRepository.findAll();
     }
 
+
     public List<Education> findByCandidate_IdOrderByEndDateDesc(int id){
         return educationRepository.findByCandidate_IdOrderByEndDateDesc(id);
     }

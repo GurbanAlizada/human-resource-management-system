@@ -37,7 +37,7 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
 
 
     public CandidateServiceImpl(CandidateRepository candidateRepository,
-                            @Qualifier("MernisServiceAdapter")    CheckPerson checkPerson,
+                            @Qualifier("FakeMernisService")    CheckPerson checkPerson,
                                 UserServiceInter userServiceInter,
                                 FakeEmailVerificationServiceImpl fakeEmailVerificationService,
                                 EducationRepository educationRepository,
@@ -68,48 +68,64 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
         return userServiceInter.getByEmail(email);
     }
 
-
     @Override
     public Candidate getById(int id){
         return candidateRepository.findById(id)
                 .orElseThrow(
-                        ()->new CandidateNotFoundException("Boyle bir is ariyan bulunmadi"));
+                        ()->new CandidateNotFoundException("Boyle bir is arayan bulunmadi"));
     }
-
 
     @Override
     public Candidate add(CandidateRequest candidateRequest ) {
 
+        // Check Mernis
         if (checkPerson.checkIfRealPerson(candidateRequest.getIdentityNumber() , candidateRequest.getName(), candidateRequest.getSurname(), candidateRequest.getDateOfBirth())) {
-            if(checkIdentityNumber(candidateRequest.getIdentityNumber()) == null){
-                if (checkEmail(candidateRequest.getEmail()) == null){
-                    if(fakeEmailVerificationService.sendEmail(candidateRequest.getEmail())){
 
-                        User user = new User(candidateRequest.getEmail(), candidateRequest.getPassword());
-
-                        Candidate candidate = Candidate.builder()
-                                .name(candidateRequest.getName())
-                                .surname(candidateRequest.getSurname())
-                                .identityNumber(candidateRequest.getIdentityNumber())
-                                .dateOfBirth(candidateRequest.getDateOfBirth())
-                                .user(user)
-                                .build();
-
-                        return candidateRepository.save(candidate);
-
-
-                    }else{
-                        throw new MernisNotFoundExcpeption("Email dogrulamasi yapilmadi");
-                    }
-                }else{
-                    throw new MernisNotFoundExcpeption("Bu email zaten sistemde  var");
-                }
-            }else{
-                throw new MernisNotFoundExcpeption("Sizin zaten sistemde bir kayitiniz var");
-            }
         } else {
             throw new MernisNotFoundExcpeption("Bu bilgilerde bir kisi bulunamadi");
         }
+
+
+
+        // Check IdentityNumber
+        if(checkIdentityNumber(candidateRequest.getIdentityNumber()) == null){
+
+        }else{
+            throw new MernisNotFoundExcpeption("Sizin zaten sistemde bir kayitiniz var");
+        }
+
+
+
+        // Check Email
+        if (checkEmail(candidateRequest.getEmail()) == null){
+
+        }else{
+            throw new MernisNotFoundExcpeption("Bu email zaten sistemde  var");
+        }
+
+
+
+        User user = new User(candidateRequest.getEmail(), candidateRequest.getPassword());
+
+        Candidate candidate = Candidate.builder()
+                .name(candidateRequest.getName())
+                .surname(candidateRequest.getSurname())
+                .identityNumber(candidateRequest.getIdentityNumber())
+                .dateOfBirth(candidateRequest.getDateOfBirth())
+                .user(user)
+                .build();
+
+
+        //  Send Email
+        if(fakeEmailVerificationService.sendEmail(candidateRequest.getEmail())){
+            return candidateRepository.save(candidate);
+        }else{
+            throw new MernisNotFoundExcpeption("Email dogrulamasi yapilmadi");
+        }
+
+
+
+
     }
 
 
@@ -208,6 +224,20 @@ public class CandidateServiceImpl implements CandidateServiceInterr {
         coverLetterRepository.save(coverLetter);
         return "Basari ile eklendi";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

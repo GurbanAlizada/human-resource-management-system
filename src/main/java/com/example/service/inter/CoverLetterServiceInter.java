@@ -8,5 +8,7 @@ public interface CoverLetterServiceInter {
 
      List<CoverLetter> getAll();
 
+     List<CoverLetter> getById(int id);
+
 
 }

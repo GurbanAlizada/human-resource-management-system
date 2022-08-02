@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","candidate"})
-public class Link {
+public class Link implements Serializable {
 
 
     @Id
@@ -35,7 +36,7 @@ public class Link {
 
 
 
-    @JsonIgnore
+   // @JsonIgnore
     @JoinColumn(name = "candidates_id")
     @ManyToOne
     private Candidate candidate;

@@ -25,7 +25,10 @@ public class LinkServiceImpl implements LinkServiceInter {
         return linkRepository.findAll();
     }
 
-
+    @Override
+    public List<Link> getById(int id) {
+        return linkRepository.findByCandidateId(id);
+    }
 
 
 }

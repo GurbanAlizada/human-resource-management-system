@@ -11,5 +11,9 @@ public interface LinkRepository extends JpaRepository<Link, Integer> {
     @Query("from Link l inner join l.candidate c where c.id =:candidateId")
     List<Link> findByCandidateId(int candidateId);
 
+    List<Link> findByCandidate_Id(int id);
+
+
+
 
 }

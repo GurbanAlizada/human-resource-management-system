@@ -23,6 +23,10 @@ public class LanguageServiceImpl implements LanguageServiceInter {
         return languageRepository.findAll();
     }
 
+    @Override
+    public List<Language> getById(int id) {
+        return languageRepository.findByCandidate_Id(id);
+    }
 
 
 }

@@ -7,5 +7,6 @@ import java.util.List;
 public interface TechnologyServiceInter {
 
      List<Technology> getAll();
+     List<Technology> findByCandidate_Id(int id);
 
 }

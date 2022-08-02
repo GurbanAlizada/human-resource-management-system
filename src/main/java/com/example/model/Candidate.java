@@ -1,11 +1,10 @@
 package com.example.model;
 
+import com.example.model.cv.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,9 +16,17 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode
 @NoArgsConstructor
 @Table(name = "candidates")
-///@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cv"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler",
+        "educationList",
+        "coverLetterList",
+        "experienceList",
+        "languageList",
+        "linkList",
+        "technologyList"
+})
 public class Candidate implements Serializable {
 
 
@@ -47,6 +54,26 @@ public class Candidate implements Serializable {
     private User user;
 
 
+   // @JsonIgnore
+    @OneToMany(mappedBy = "candidate")
+    private List<Education> educationList;
+
+
+    @OneToMany(mappedBy = "candidate")
+    private List<CoverLetter> coverLetterList;
+
+
+    @OneToMany(mappedBy = "candidate")
+    private List<Experience> experienceList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<Language> languageList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<Link> linkList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<Technology> technologyList;
 
 
 }

@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import javax.persistence.*;
-
+import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -14,8 +15,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @NoArgsConstructor
+@Table(name = "cover_letter")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","candidate"})
-public class CoverLetter {
+public class CoverLetter implements Serializable {
 
 
     @Id
@@ -28,10 +30,16 @@ public class CoverLetter {
     private String cover;
 
 
-    @JsonIgnore
+   // @JsonIgnore
     @JoinColumn(name = "candidates_id")
     @ManyToOne
     private Candidate candidate;
+
+
+
+
+
+
 
 
 }

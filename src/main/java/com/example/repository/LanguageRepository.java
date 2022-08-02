@@ -12,4 +12,5 @@ public interface LanguageRepository extends JpaRepository<Language , Integer> {
     List<Language> findByCandidateId(int candidateId);
 
 
+    List<Language> findByCandidate_Id(int id);
 }

@@ -5,11 +5,14 @@ import com.example.dtos.CVDto;
 import com.example.dtos.request.*;
 import com.example.service.inter.CandidateServiceInterr;
 import com.example.service.inter.CvServiceInter;
-import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/cv")
+@CrossOrigin
 public class CvController {
 
     private final CvServiceInter cvServiceInter;
@@ -20,9 +23,12 @@ public class CvController {
         this.candidateService = candidateService;
     }
 
+
+
+
     @GetMapping("/getById")
-    public CVDto getById(@RequestParam("id") int id){
-        return  cvServiceInter.getById(id);
+    public ResponseEntity<CVDto> getById(@RequestParam("id") int id){
+        return  ResponseEntity.ok(cvServiceInter.getById(id));
     }
 
 
@@ -30,46 +36,49 @@ public class CvController {
 
 
     @PostMapping("/addEducation")
-    public String addEducation(@RequestBody EducationRequest educationRequest){
-        return candidateService.addEducation(educationRequest);
+    public ResponseEntity<String> addEducation(@RequestBody @Valid EducationRequest educationRequest){
+        return ResponseEntity.ok(candidateService.addEducation(educationRequest));
     }
 
 
 
     @PostMapping("/addLanguage")
-    public String addLanguage(@RequestBody LanguageRequest languageRequest){
-        return candidateService.addLanguage(languageRequest);
+    public ResponseEntity<String> addLanguage(@Valid @RequestBody LanguageRequest languageRequest){
+        return ResponseEntity.ok(candidateService.addLanguage(languageRequest));
     }
 
 
 
     @PostMapping("/addExperience")
-    public String addExperience(@RequestBody ExperinceRequest experinceRequest){
-        return candidateService.addExperience(experinceRequest);
+    public ResponseEntity<String> addExperience(@RequestBody @Valid ExperinceRequest experinceRequest){
+        return ResponseEntity.ok(candidateService.addExperience(experinceRequest));
     }
 
 
 
     @PostMapping("/addLink")
-    public String addLink(@RequestBody LinkRequest linkRequest){
+    public ResponseEntity<String> addLink(@RequestBody @Valid LinkRequest linkRequest){
 
-        return candidateService.addLink(linkRequest);
+        return ResponseEntity.ok(candidateService.addLink(linkRequest));
     }
 
 
 
 
     @PostMapping("/addTechno")
-    public String addTechno(@RequestBody TechnologyRequest technologyRequest){
+    public ResponseEntity<String> addTechno(@RequestBody @Valid TechnologyRequest technologyRequest){
 
-        return candidateService.addTechno(technologyRequest);
+        return ResponseEntity.ok(candidateService.addTechno(technologyRequest));
     }
 
 
     @PostMapping("/addLetter")
-    public String addLetter(@RequestBody CoverLetterRequest coverLetterRequest){
-        return candidateService.addLetter(coverLetterRequest);
+    public ResponseEntity<String> addLetter(@RequestBody @Valid CoverLetterRequest coverLetterRequest){
+        return ResponseEntity.ok(candidateService.addLetter(coverLetterRequest));
     }
+
+
+
 
 
 

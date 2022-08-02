@@ -2,22 +2,22 @@ package com.example.model.cv;
 import com.example.model.Candidate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode
+@Table(name = "technology")
 @Builder
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","candidate"})
-public class Technology {
+public class Technology implements Serializable {
 
 
     @Id
@@ -31,7 +31,7 @@ public class Technology {
 
 
 
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "candidates_id")
     @ManyToOne
     private Candidate candidate;

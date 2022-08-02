@@ -41,11 +41,11 @@ public class CvServiceImpl implements CvServiceInter {
         CVDto cvDto = CVDto.builder()
                 .candidate(candidateRepository.findById(candidateId).get())
                 .coverLetterList(coverLetterRepository.findByCandidateId(candidateId))
-                .educationList(educationRepository.findByCandidateId(candidateId))
+                .educationList(educationRepository.findByCandidate_Id(candidateId))
                 .experienceList(experienceRepository.findByCandidateId(candidateId))
-                .languageList(languageRepository.findByCandidateId(candidateId))
+                .languageList(languageRepository.findByCandidate_Id(candidateId))
                 .linkList(linkRepository.findByCandidateId(candidateId))
-                .technologyList(technologyRepository.findByCandidateId(candidateId))
+                .technologyList(technologyRepository.findByCandidate_Id(candidateId))
                 .build();
 
         return cvDto;

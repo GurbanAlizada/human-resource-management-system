@@ -40,6 +40,7 @@ public class PhotoController {
 
 
 
+
     @RequestMapping(value = "/upload1", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE }, method = RequestMethod.POST)
     public ResponseEntity<Void> uploadFile(@RequestPart String description, @RequestPart MultipartFile file) {
         //yaay!
